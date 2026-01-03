@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - StructurePro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #0c4da2;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #ffd700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffd700;
+        }
+        .page-header {
+            background-image: url(images/back.jpeg);
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .faq-section {
+            padding: 3rem 0;
+        }
+
+        .faq-container {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .faq-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-btn {
+            padding: 0.6rem 1.2rem;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background-color: #0c4da2;
+            color: white;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1.5rem;
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0c4da2;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+        }
+
+        .faq-question.open::after {
+            content: '-';
+        }
+
+        .faq-answer {
+            padding-top: 0.5rem;
+            display: none;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        .faq-answer p {
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-container {
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .search-box button {
+            padding: 0.8rem 1.5rem;
+            background-color: #0c4da2;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .contact-cta {
+            background-color: #f0f7ff;
+            border-radius: 5px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .contact-cta h3 {
+            margin-bottom: 1rem;
+            color: #0c4da2;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #0c4da2;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #083b7d;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffd700;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #0c4da2;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #083b7d;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #555;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Structure<span>Pro</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="store.html">Boutique</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html" class="active">Blog</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Foire Aux Questions</h1>            
+            <p>Réponses aux questions fréquemment posées sur nos services et le génie civil</p>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" placeholder="Rechercher une question...">
+                    <button>Rechercher</button>
+                </div>
+            </div>
+
+            <div class="faq-categories">
+                <button class="category-btn active">Toutes</button>
+                <button class="category-btn">Services</button>
+                <button class="category-btn">Projets</button>
+                <button class="category-btn">Tarifs</button>
+                <button class="category-btn">Techniques</button>
+                <button class="category-btn">Boutique</button>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">Quels types de services proposez-vous?</div>
+                    <div class="faq-answer">
+                        <p>StructurePro offre une large gamme de services en génie civil et structural, notamment :</p>
+                        <ul>
+                            <li>Conception et analyse structurelle</li>
+                            <li>Études géotechniques</li>
+                            <li>Analyse sismique et résistance aux catastrophes</li>
+                            <li>Inspection et évaluation des bâtiments</li>
+                            <li>Rénovation et réhabilitation de structures</li>
+                            <li>Consultation technique et expertise judiciaire</li>
+                            <li>Gestion de projets de construction</li>
+                            <li>Formation et ateliers techniques</li>
+                        </ul>
+                        <p>Nous adaptons nos services aux besoins spécifiques de chaque client, qu'il s'agisse de petits projets résidentiels ou de grands projets d'infrastructure.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Comment se déroule un projet typique avec votre agence?</div>
+                    <div class="faq-answer">
+                        <p>Un projet typique avec StructurePro se déroule généralement en plusieurs phases :</p>
+                        <ol>
+                            <li><strong>Consultation initiale</strong> : Nous discutons de vos besoins, objectifs et contraintes.</li>
+                            <li><strong>Étude préliminaire</strong> : Nous analysons la faisabilité et élaborons un concept initial.</li>
+                            <li><strong>Proposition détaillée</strong> : Nous vous présentons un devis, un calendrier et une description du projet.</li>
+                            <li><strong>Conception</strong> : Nos ingénieurs développent des plans détaillés et des spécifications.</li>
+                            <li><strong>Révisions</strong> : Nous affinons la conception selon vos commentaires.</li>
+                            <li><strong>Documentation technique</strong> : Nous préparons tous les documents nécessaires pour les permis et l'exécution.</li>
+                            <li><strong>Assistance pendant la construction</strong> : Nous assurons un suivi pour garantir que le projet est réalisé conformément aux plans.</li>
+                            <li><strong>Inspection finale</strong> : Nous vérifions que tout est conforme aux normes et aux spécifications.</li>
+                        </ol>
+                        <p>La durée et la complexité de chaque phase varient selon la nature et l'envergure du projet.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Quels sont vos tarifs?</div>
+                    <div class="faq-answer">
+                        <p>Nos tarifs varient en fonction de la nature et de la complexité du projet. Nous proposons plusieurs modèles de tarification :</p>
+                        <ul>
+                            <li><strong>Tarif horaire</strong> : Pour les consultations et les petits projets (entre 80€ et 150€ de l'heure selon le niveau d'expertise requis).</li>
+                            <li><strong>Forfait par projet</strong> : Un prix fixe pour l'ensemble du projet, déterminé après l'évaluation initiale.</li>
+                            <li><strong>Pourcentage du coût de construction</strong> : Généralement entre 5% et 15% du coût total du projet pour les grands projets de construction.</li>
+                        </ul>
+                        <p>Nous vous fournirons toujours un devis détaillé avant le début des travaux. Pour obtenir une estimation pour votre projet spécifique, n'hésitez pas à nous contacter pour une consultation initiale gratuite.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Travaillez-vous avec des projets résidentiels ou uniquement commerciaux?</div>
+                    <div class="faq-answer">
+                        <p>Nous travaillons avec une grande variété de projets, tant résidentiels que commerciaux ou industriels. Notre équipe a l'expertise nécessaire pour :</p>
+                        <ul>
+                            <li><strong>Projets résidentiels</strong> : Maisons individuelles, extensions, rénovations, renforcements structurels, expertise après sinistre, etc.</li>
+                            <li><strong>Projets commerciaux</strong> : Bureaux, commerces, hôtels, restaurants, centres commerciaux, etc.</li>
+                            <li><strong>Projets industriels</strong> : Usines, entrepôts, installations techniques, etc.</li>
+                            <li><strong>Infrastructures</strong> : Ponts, routes, systèmes d'eau, etc.</li>
+                        </ul>
+                        <p>Quelle que soit la taille de votre projet, nous appliquons la même rigueur et le même professionnalisme pour garantir sa réussite.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Combien de temps faut-il pour compléter un projet?</div>
+                    <div class="faq-answer">
+                        <p>La durée d'un projet dépend de plusieurs facteurs, notamment sa complexité, sa taille, et les exigences réglementaires. Voici quelques estimations générales :</p>
+                        <ul>
+                            <li><strong>Petits projets résidentiels</strong> (extensions, rénovations) : 2-4 semaines pour la conception</li>
+                            <li><strong>Maisons individuelles</strong> : 4-8 semaines pour la conception complète</li>
+                            <li><strong>Bâtiments commerciaux moyens</strong> : 2-4 mois pour la conception</li>
+                            <li><strong>Grands projets complexes</strong> : 6-12 mois ou plus</li>
+                        </ul>
+                        <p>Ces délais concernent uniquement la phase de conception et d'ingénierie. La phase de construction, qui n'est généralement pas sous notre contrôle direct (sauf pour la supervision), peut prendre beaucoup plus de temps.</p>
+                        <p>Nous établissons toujours un calendrier détaillé au début du projet et nous vous tenons informé de tout changement potentiel.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Quelles sont les normes et réglementations que vous suivez?</div>
+                    <div class="faq-answer">
+                        <p>Nous respectons rigoureusement toutes les normes et réglementations applicables en matière de construction et de génie civil, notamment :</p>
+                        <ul>
+                            <li><strong>Eurocodes</strong> : Ensemble de normes européennes pour la conception des structures</li>
+                            <li><strong>DTU (Documents Techniques Unifiés)</strong> : Normes françaises spécifiques</li>
+                            <li><strong>Réglementation thermique (RT 2020, RE 2020)</strong> : Pour l'efficacité énergétique des bâtiments</li>
+                            <li><strong>Normes d'accessibilité</strong> : Pour les personnes à mobilité réduite</li>
+                            <li><strong>Réglementation parasismique</strong> : Selon les zones géographiques</li>
+                            <li><strong>Normes environnementales</strong> : HQE, BREEAM, LEED, etc.</li>
+                        </ul>
+                        <p>Notre équipe se tient constamment informée des évolutions réglementaires pour garantir que tous nos projets sont conformes aux normes les plus récentes.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Proposez-vous des solutions écologiques ou durables?</div>
+                    <div class="faq-answer">
+                        <p>Absolument, la durabilité est au cœur de notre philosophie de conception. Nous proposons diverses solutions écologiques :</p>
+                        <ul>
+                            <li><strong>Matériaux durables</strong> : Utilisation de matériaux recyclés, à faible empreinte carbone, ou d'origine locale</li>
+                            <li><strong>Efficacité énergétique</strong> : Conception optimisée pour réduire la consommation d'énergie</li>
+                            <li><strong>Systèmes d'énergie renouvelable</strong> : Intégration de panneaux solaires, géothermie, etc.</li>
+                            <li><strong>Gestion de l'eau</strong> : Systèmes de récupération d'eau de pluie, traitement des eaux grises</li>
+                            <li><strong>Toits verts et murs végétalisés</strong> : Pour améliorer l'isolation et la biodiversité</li>
+                            <li><strong>Certifications environnementales</strong> : Assistance pour l'obtention de certifications HQE, BREEAM, LEED, etc.</li>
+                        </ul>
+                        <p>Nous pouvons vous conseiller sur les solutions les plus adaptées à votre projet et à votre budget, tout en maximisant les bénéfices environnementaux.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Comment puis-je passer commande dans votre boutique en ligne?</div>
+                    <div class="faq-answer">
+                        <p>Passer commande dans notre boutique en ligne est simple et rapide :</p>
+                        <ol>
+                            <li>Naviguez dans notre catalogue de produits et sélectionnez les articles qui vous intéressent.</li>
+                            <li>Ajoutez-les à votre panier en cliquant sur le bouton "Ajouter au panier".</li>
+                            <li>Une fois vos achats terminés, cliquez sur l'icône du panier en haut de la page.</li>
+                            <li>Vérifiez le contenu de votre panier et cliquez sur "Procéder au paiement".</li>
+                            <li>Si vous êtes un nouveau client, créez un compte ou choisissez de commander en tant qu'invité.</li>
+                            <li>Remplissez vos informations de livraison et de facturation.</li>
+                            <li>Choisissez votre mode de livraison préféré.</li>
+                            <li>Sélectionnez votre mode de paiement et complétez la transaction.</li>
+                            <li>Vous recevrez une confirmation de commande par email avec un numéro de suivi.</li>
+                        </ol>
+                        <p>Pour toute assistance pendant le processus de commande, n'hésitez pas à contacter notre service client au +33 1 23 45 67 89 ou par email à boutique@structurepro.fr.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Quels sont les délais de livraison pour les produits de votre boutique?</div>
+                    <div class="faq-answer">
+                        <p>Nos délais de livraison dépendent du type de produit et de votre localisation :</p>
+                        <ul>
+                            <li><strong>Produits en stock</strong> :
+                                <ul>
+                                    <li>France métropolitaine : 2-3 jours ouvrables</li>
+                                    <li>Europe : 3-5 jours ouvrables</li>
+                                    <li>International : 7-14 jours ouvrables</li>
+                                </ul>
+                            </li>
+                            <li><strong>Produits sur commande</strong> :
+                                <ul>
+                                    <li>Logiciels et outils standards : 1-2 semaines</li>
+                                    <li>Équipements spécialisés : 2-4 semaines</li>
+                                    <li>Produits personnalisés : 4-6 semaines</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p>Le délai estimé est toujours indiqué sur la page du produit. Une fois votre commande expédiée, vous recevrez un email de confirmation avec un numéro de suivi pour suivre votre colis en temps réel.</p>
+                        <p>Pour les commandes urgentes, nous proposons également des options de livraison express moyennant des frais supplémentaires.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Quelles garanties offrez-vous sur vos projets?</div>
+                    <div class="faq-answer">
+                        <p>Nous offrons plusieurs niveaux de garantie pour assurer votre tranquillité d'esprit :</p>
+                        <ul>
+                            <li><strong>Garantie de qualité</strong> : Tous nos travaux sont conformes aux normes et réglementations en vigueur.</li>
+                            <li><strong>Assurance professionnelle</strong> : Nous disposons d'une assurance responsabilité civile professionnelle qui couvre tous nos services.</li>
+                            <li><strong>Garantie décennale</strong> : Conformément à la loi française, nos travaux sont couverts par la garantie décennale qui protège contre les défauts structurels pendant 10 ans.</li>
+                            <li><strong>Garantie de bon fonctionnement (biennale)</strong> : Couvre les éléments d'équipement dissociables pendant 2 ans.</li>
+                            <li><strong>Garantie de parfait achèvement</strong> : Pendant un an après la réception des travaux, nous intervenons pour corriger tout défaut signalé.</li>
+                        </ul>
+                        <p>Ces garanties sont détaillées dans nos contrats et s'appliquent dans le cadre d'une utilisation normale des ouvrages réalisés.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-cta">
+                <h3>Vous n'avez pas trouvé votre réponse?</h3>
+                <p>Notre équipe est prête à répondre à toutes vos questions spécifiques. N'hésitez pas à nous contacter.</p>
+                <a href="contact.html" class="btn">Contactez-nous</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>StructurePro</h3>
+                    <p>Votre partenaire pour tous vos projets de génie civil et de structure. Nous offrons des solutions innovantes et durables.</p>
+                    <div class="social-links">
+                        <a href="#"><span>f</span></a>
+                        <a href="#"><span>t</span></a>
+                        <a href="#"><span>in</span></a>
+                        <a href="#"><span>ig</span></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="store.html">Boutique</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Nos services</h3>
+                    <ul>
+                        <li><a href="#">Conception structurelle</a></li>
+                        <li><a href="#">Analyse sismique</a></li>
+                        <li><a href="#">Études géotechniques</a></li>
+                        <li><a href="#">Inspection des bâtiments</a></li>
+                        <li><a href="#">Consultation technique</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 StructurePro. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script pour faire fonctionner les questions-réponses
+        document.addEventListener('DOMContentLoaded', function() {
+            const questions = document.querySelectorAll('.faq-question');
+            
+            questions.forEach(question => {
+                question.addEventListener('click', function() {
+                    // Toggle la classe active pour la question
+                    this.classList.toggle('open');
+                    
+                    // Trouve la réponse correspondante
+                    const answer = this.nextElementSibling;
+                    
+                    // Toggle la classe show pour la réponse
+                    answer.classList.toggle('show');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

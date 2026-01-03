@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Actualités - StructurePro</title>
+    <style>
+        /* Variables et styles de base */
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #4285f4;
+            --dark-color: #333333;
+            --light-color: #f4f4f4;
+            --gray-color: #888888;
+            --success-color: #28a745;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f9f9f9;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        header {
+            background-color: #0c4da2;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #ffd700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffd700;
+        }
+        .page-header {
+            background-image: url(images/back.jpeg);
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+
+        /* Blog Section */
+        .blog-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .main-content article {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .main-content article:hover {
+            transform: translateY(-5px);
+        }
+
+        .article-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        article:hover .article-image img {
+            transform: scale(1.05);
+        }
+
+        .article-content {
+            padding: 25px;
+        }
+
+        .article-meta {
+            display: flex;
+            color: var(--gray-color);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .meta-item i {
+            margin-right: 5px;
+        }
+
+        .article-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+
+        .article-summary {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .read-more {
+            font-weight: 500;
+            color: var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .read-more i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 0 5px;
+            border-radius: 4px;
+            background: white;
+            color: var(--dark-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .pagination a.active, 
+        .pagination a:hover {
+            background-color: #0c4da2;;
+            color: white;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            align-self: start;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-widget {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .widget-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--dark-color);
+        }
+
+        .search-form {
+            display: flex;
+        }
+
+        .search-input {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+        }
+
+        .search-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            padding: 0 15px;
+            cursor: pointer;
+        }
+
+        .category-list li {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+
+        .category-list li:last-child {
+            border-bottom: none;
+        }
+
+        .category-list a {
+            color: var(--dark-color);
+            display: flex;
+            justify-content: space-between;
+            transition: color 0.3s ease;
+        }
+
+        .category-list a:hover {
+            color: var(--primary-color);
+        }
+
+        .category-count {
+            background: var(--light-color);
+            font-size: 14px;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .popular-posts-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .popular-posts-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .popular-post-img {
+            width: 80px;
+            height: 80px;
+            margin-right: 15px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .popular-post-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .popular-post-content h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .popular-post-content span {
+            font-size: 12px;
+            color: var(--gray-color);
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .tag-cloud a {
+            background: var(--light-color);
+            color: var(--dark-color);
+            font-size: 14px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin: 0 10px 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .tag-cloud a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background-color: var(--primary-color);
+            padding: 60px 0;
+            color: white;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .newsletter h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex-grow: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+        }
+
+        .newsletter-btn {
+            background: var(--dark-color);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: #222;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffd700;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #0c4da2;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #083b7d;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #555;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+    <!-- Fontawesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Structure<span>Pro</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html" class="active">À propos</a></li>
+                        <li><a href="store.html">Boutique</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html" class="active">Blog</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Blog & Actualités</h1> 
+            <p>Blog & Actualités</p>
+        </div>
+    </section>
+    <br><br>
+    <!-- Blog Main Content -->
+    <div class="container blog-container">
+        <div class="main-content">
+            <article>
+                <div class="article-image">
+                    <img src="images/Nouveaux matériaux de construction écologiques.jpeg" alt="Nouveaux matériaux de construction écologiques">
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="meta-item"><i class="far fa-calendar"></i> 18 avril 2025</span>
+                        <span class="meta-item"><i class="far fa-user"></i> Jean Dupont</span>
+                        <span class="meta-item"><i class="far fa-folder"></i> Innovation</span>
+                    </div>
+                    <h2 class="article-title">Les nouveaux matériaux de construction écologiques en 2025</h2>
+                    <p class="article-summary">Découvrez les dernières avancées en matière de matériaux de construction écologiques et durables. Des bétons dépolluants aux isolants biosourcés, ces innovations transforment le secteur du BTP en le rendant plus respectueux de l'environnement...</p>
+                    <a href="#" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-image">
+                    <img src="images/BIM et construction numérique.jpeg" alt="BIM et construction numérique">
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="meta-item"><i class="far fa-calendar"></i> 10 avril 2025</span>
+                        <span class="meta-item"><i class="far fa-user"></i> Marie Laurent</span>
+                        <span class="meta-item"><i class="far fa-folder"></i> Technologie</span>
+                    </div>
+                    <h2 class="article-title">Comment le BIM révolutionne la conception structurelle</h2>
+                    <p class="article-summary">La modélisation des informations du bâtiment (BIM) continue de transformer la façon dont nous concevons, construisons et gérons les structures. Dans cet article, nous explorons comment cette technologie permet d'optimiser les calculs structurels et d'améliorer la collaboration entre les différents acteurs du projet...</p>
+                    <a href="#" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-image">
+                    <img src="images/Guide calcul de charges.jpeg" alt="Guide calcul de charges">
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="meta-item"><i class="far fa-calendar"></i> 2 avril 2025</span>
+                        <span class="meta-item"><i class="far fa-user"></i> Thomas Mercier</span>
+                        <span class="meta-item"><i class="far fa-folder"></i> Tutoriels</span>
+                    </div>
+                    <h2 class="article-title">Guide pratique : Calcul des charges pour les structures résidentielles</h2>
+                    <p class="article-summary">Ce tutoriel détaillé vous guide pas à pas dans le calcul des charges pour les constructions résidentielles selon les normes Eurocodes. Apprenez à évaluer correctement les charges permanentes, d'exploitation, climatiques et sismiques pour garantir la sécurité et la conformité de vos projets...</p>
+                    <a href="#" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <article>
+                <div class="article-image">
+                    <img src="images/Rénovation bâtiments anciens.png" alt="Rénovation bâtiments anciens">
+                </div>
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span class="meta-item"><i class="far fa-calendar"></i> 25 mars 2025</span>
+                        <span class="meta-item"><i class="far fa-user"></i> Sophie Berger</span>
+                        <span class="meta-item"><i class="far fa-folder"></i> Rénovation</span>
+                    </div>
+                    <h2 class="article-title">Défis structurels de la rénovation des bâtiments historiques</h2>
+                    <p class="article-summary">La rénovation des bâtiments historiques présente des défis uniques pour les ingénieurs en structure. Cet article analyse les approches modernes pour renforcer les structures anciennes tout en préservant leur valeur patrimoniale, avec des études de cas de projets récents en France...</p>
+                    <a href="#" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#"><i class="fas fa-angle-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Recherche</h3>
+                <form class="search-form">
+                    <input type="text" class="search-input" placeholder="Rechercher...">
+                    <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Catégories</h3>
+                <ul class="category-list">
+                    <li><a href="#">Innovation <span class="category-count">8</span></a></li>
+                    <li><a href="#">Technologie <span class="category-count">12</span></a></li>
+                    <li><a href="#">Tutoriels <span class="category-count">15</span></a></li>
+                    <li><a href="#">Rénovation <span class="category-count">7</span></a></li>
+                    <li><a href="#">Projets <span class="category-count">10</span></a></li>
+                    <li><a href="#">Normes et Réglementations <span class="category-count">6</span></a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Articles populaires</h3>
+                <div class="popular-posts">
+                    <div class="popular-posts-item">
+                        <div class="popular-post-img">
+                            <img src="images/Impact environnemental.jpeg" alt="Impact environnemental">
+                        </div>
+                        <div class="popular-post-content">
+                            <h4><a href="#">Réduire l'impact environnemental des grands projets</a></h4>
+                            <span>15 mars 2025</span>
+                        </div>
+                    </div>
+                    <div class="popular-posts-item">
+                        <div class="popular-post-img">
+                            <img src="images/IA dans la construction.png" alt="IA dans la construction">
+                        </div>
+                        <div class="popular-post-content">
+                            <h4><a href="#">L'IA dans l'optimisation des structures</a></h4>
+                            <span>5 mars 2025</span>
+                        </div>
+                    </div>
+                    <div class="popular-posts-item">
+                        <div class="popular-post-img">
+                            <img src="images/Ponts innovants.jpeg" alt="Ponts innovants">
+                        </div>
+                        <div class="popular-post-content">
+                            <h4><a href="#">Les ponts innovants du 21ème siècle</a></h4>
+                            <span>20 février 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Tags</h3>
+                <div class="tag-cloud">
+                    <a href="#">BIM</a>
+                    <a href="#">Construction durable</a>
+                    <a href="#">Eurocodes</a>
+                    <a href="#">Calcul structurel</a>
+                    <a href="#">Béton</a>
+                    <a href="#">Rénovation</a>
+                    <a href="#">Matériaux innovants</a>
+                    <a href="#">Sécurité</a>
+                    <a href="#">Logiciels</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Abonnez-vous à notre newsletter</h2>
+            <p>Recevez nos derniers articles, tutoriels et actualités directement dans votre boîte mail.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Votre adresse email">
+                <button type="submit" class="newsletter-btn">S'abonner</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>StructurePro</h3>
+                    <p>Votre partenaire pour tous vos projets de génie civil et de structure. Nous offrons des solutions innovantes et durables.</p>
+                    <div class="social-links">
+                        <a href="#"><span>f</span></a>
+                        <a href="#"><span>t</span></a>
+                        <a href="#"><span>in</span></a>
+                        <a href="#"><span>ig</span></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="store.html">Boutique</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Nos services</h3>
+                    <ul>
+                        <li><a href="#">Conception structurelle</a></li>
+                        <li><a href="#">Analyse sismique</a></li>
+                        <li><a href="#">Études géotechniques</a></li>
+                        <li><a href="#">Inspection des bâtiments</a></li>
+                        <li><a href="#">Consultation technique</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 StructurePro. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+
+        // Scroll animation for articles
+        const articles = document.querySelectorAll('article');
+        
+        function checkScroll() {
+            articles.forEach(article => {
+                const articleTop = article.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (articleTop < windowHeight - 100) {
+                    article.style.opacity = '1';
+                    article.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize articles with fade-in effect
+        articles.forEach(article => {
+            article.style.opacity = '0';
+            article.style.transform = 'translateY(20px)';
+            article.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+
+        // Check scroll position on load and scroll
+        window.addEventListener('load', checkScroll);
+        window.addEventListener('scroll', checkScroll);
+        
+        // Newsletter form validation
+        const newsletterForm = document.querySelector('.newsletter-form');
+        const emailInput = document.querySelector('.newsletter-input');
+        
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const emailValue = emailInput.value.trim();
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (!emailPattern.test(emailValue)) {
+                    alert('Veuillez entrer une adresse email valide.');
+                    emailInput.focus();
+                    return false;
+                }
+                
+                alert('Merci pour votre inscription à notre newsletter!');
+                emailInput.value = '';
+            });
+        }
+        
+        // Search form functionality
+        const searchForm = document.querySelector('.search-form');
+        const searchInput = document.querySelector('.search-input');
+        
+        if (searchForm) {
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const searchValue = searchInput.value.trim();
+                
+                if (searchValue === '') {
+                    alert('Veuillez entrer un terme de recherche.');
+                    searchInput.focus();
+                    return false;
+                }
+                
+                // Here you would normally submit the search to your backend
+                // For this demo, we'll just alert
+                alert('Recherche de: ' + searchValue);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique - StructurePro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #0c4da2;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #ffd700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffd700;
+        }
+        
+        .page-header {
+            background-image: url(images/back.jpeg);
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .store-section {
+            padding: 4rem 0;
+        }
+        
+        .filter-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+        }
+        
+        .search-bar {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .search-input {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 250px;
+        }
+        
+        .search-btn {
+            padding: 0.5rem 1rem;
+            background-color: #0c4da2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .search-btn:hover {
+            color: #3498db;        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-img {
+            height: 200px;
+            width: 100%;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #3498db;
+            margin: 1rem 0;
+        }
+        
+        .product-rating {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .star {
+            color: #f39c12;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #0c4da2;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            color: #3498db;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+        
+        .page-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s;
+        }
+        
+        .page-link:hover, .page-link.active {
+            background-color: #0c4da2;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffd700;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #0c4da2;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #083b7d;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #555;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Structure<span>Pro</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="store.html" class="active">Boutique</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html" class="active">Blog</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section class="page-header">
+        <div class="container">
+            <h1>Notre Boutique</h1>
+            <p>Équipements, outils et matériaux de qualité pour vos projets</p>
+        </div>
+    </section>
+    
+    <section class="store-section">
+        <div class="container">
+            <div class="filter-container">
+                <div class="filter-options">
+                    <select class="filter-select">
+                        <option value="">Catégories</option>
+                        <option value="outils">Outils de mesure</option>
+                        <option value="logiciels">Logiciels</option>
+                        <option value="materiaux">Matériaux</option>
+                        <option value="equipements">Équipements de protection</option>
+                    </select>
+                    <select class="filter-select">
+                        <option value="">Prix</option>
+                        <option value="asc">Prix croissant</option>
+                        <option value="desc">Prix décroissant</option>
+                    </select>
+                    <select class="filter-select">
+                        <option value="">Disponibilité</option>
+                        <option value="stock">En stock</option>
+                        <option value="preorder">Précommande</option>
+                    </select>
+                </div>
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Rechercher un produit...">
+                    <button class="search-btn">Rechercher</button>
+                </div>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/Niveau laser professionnel.jpg" alt="Niveau laser professionnel" style="max-width:100%; max-height:100%;">
+                    </div>
+                    <div class="product-info">
+                        <h3>Niveau Laser Professionnel</h3>
+                        <p>Niveau laser rotatif avec précision de ±0.1mm/m et portée de 500m.</p>
+                        <div class="product-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <p class="product-price">899,99 DH</p>
+                        <button class="btn">Ajouter au panier</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/Logiciel structure....jpg" alt="Logiciel d'analyse structurelle" style="max-width:100%; max-height:100%;">
+                    </div>
+                    <div class="product-info">
+                        <h3>Logiciel StructAnalyze Pro</h3>
+                        <p>Logiciel d'analyse structurelle avancé avec modélisation 3D et simulation de charge.</p>
+                        <div class="product-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">☆</span>
+                        </div>
+                        <p class="product-price">1 499,99 DH</p>
+                        <button class="btn">Ajouter au panier</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/Casque de sécurité.jpeg" alt="Casque de sécurité" style="max-width:100%; max-height:100%;">
+                    </div>
+                    <div class="product-info">
+                        <h3>Casque de Sécurité Pro+</h3>
+                        <p>Casque de chantier certifié avec visière intégrée et protection auditive.</p>
+                        <div class="product-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">☆</span>
+                        </div>
+                        <p class="product-price">89,99 DH</p>
+                        <button class="btn">Ajouter au panier</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/Station totale.jpg" alt="Station totale" style="max-width:100%; max-height:100%;">
+                    </div>
+                    <div class="product-info">
+                        <h3>Station Totale TS60</h3>
+                        <p>Station totale robotisée avec précision angulaire de 1" et portée sans prisme de 1000m.</p>
+                        <div class="product-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <p class="product-price">12 499,99 DH</p>
+                        <button class="btn">Ajouter au panier</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/Gilet de sécurité.jpg" alt="Gilet de sécurité" style="max-width:100%; max-height:100%;">
+                    </div>
+                    <div class="product-info">
+                        <h3>Gilet de Sécurité Hi-Vis</h3>
+                        <p>Gilet haute visibilité certifié avec multiples poches et bandes réfléchissantes.</p>
+                        <div class="product-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">☆</span>
+                        </div>
+                        <p class="product-price">49,99 DH</p>
+                        <button class="btn">Ajouter au panier</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/Télémètre laser.jpeg" alt="Télémètre laser" style="max-width:100%; max-height:100%;">
+                    </div>
+                    <div class="product-info">
+                        <h3>Télémètre Laser TL200</h3>
+                        <p>Télémètre laser professionnel avec portée de 200m et précision de ±1mm.</p>
+                        <div class="product-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <p class="product-price">299,99 DH</p>
+                        <button class="btn">Ajouter au panier</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/Béton haute performance.jpg" alt="Béton haute performance" style="max-width:100%; max-height:100%;">
+                    </div>
+                    <div class="product-info">
+                        <h3>Béton Haute Performance</h3>
+                        <p>Mélange de béton haute résistance pour structures exigeant une durabilité exceptionnelle.</p>
+                        <div class="product-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                        </div>
+                        <p class="product-price">199,99 DH /m³</p>
+                        <button class="btn">Ajouter au panier</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="images/Drone d'insperction.jpg" alt="Drone d'inspection" style="max-width:100%; max-height:100%;">
+                    </div>
+                    <div class="product-info">
+                        <h3>Drone d'Inspection DR-X1</h3>
+                        <p>Drone professionnel pour l'inspection de structures avec caméra 4K et capteurs thermiques.</p>
+                        <div class="product-rating">
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">★</span>
+                            <span class="star">☆</span>
+                        </div>
+                        <p class="product-price">3 999,99 DH</p>
+                        <button class="btn">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <a href="#" class="page-link active">1</a>
+                <a href="#" class="page-link">2</a>
+                <a href="#" class="page-link">3</a>
+                <a href="#" class="page-link">4</a>
+                <a href="#" class="page-link">›</a>
+                <a href="#" class="page-link">»</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>StructurePro</h3>
+                    <p>Votre partenaire pour tous vos projets de génie civil et de structure. Nous offrons des solutions innovantes et durables.</p>
+                    <div class="social-links">
+                        <a href="#"><span>f</span></a>
+                        <a href="#"><span>t</span></a>
+                        <a href="#"><span>in</span></a>
+                        <a href="#"><span>ig</span></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="store.html">Boutique</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Nos services</h3>
+                    <ul>
+                        <li><a href="#">Conception structurelle</a></li>
+                        <li><a href="#">Analyse sismique</a></li>
+                        <li><a href="#">Études géotechniques</a></li>
+                        <li><a href="#">Inspection des bâtiments</a></li>
+                        <li><a href="#">Consultation technique</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 StructurePro. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

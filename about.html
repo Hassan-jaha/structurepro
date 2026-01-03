@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À propos - StructurePro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #0c4da2;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #ffd700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffd700;
+        }
+        
+        .page-header {
+            background-image: url(images/back.jpeg);     
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .about-section {
+            padding: 4rem 0;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-text h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+        
+        .team-section {
+            padding: 4rem 0;
+            background-color: #ecf0f1;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+        }
+        
+        .section-title p {
+            color: #7f8c8d;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .member-img {
+            height: 250px;
+            width: 100%;
+            background-color: #ddd;
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+        }
+        
+        .member-info h3 {
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .member-info .role {
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-section {
+            padding: 4rem 0;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #3498db;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: #fff;
+            border: 4px solid #3498db;
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -17px;
+        }
+        
+        .right::after {
+            left: -17px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-content h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content .date {
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffd700;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #0c4da2;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #083b7d;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #555;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Structure<span>Pro</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html" class="active">À propos</a></li>
+                        <li><a href="store.html">Boutique</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html" class="active">Blog</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section class="page-header">
+        <div class="container">
+            <h1>À Propos de Nous</h1>
+            <p>Découvrez notre histoire, notre mission et notre équipe d'experts</p>
+        </div>
+    </section>
+    
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="images/Notre équipe.jpeg" alt="Notre équipe" style="width:100%">
+                </div>
+                <div class="about-text">
+                    <h2>Notre Mission</h2>
+                    <p>Fondée en 2005, StructurePro s'est établie comme un leader dans le domaine du génie civil et de l'ingénierie structurelle. Notre mission est de fournir des solutions innovantes, durables et économiques qui répondent aux défis complexes de l'industrie de la construction moderne.</p>
+                    <p>Nous combinons une expertise technique approfondie avec une approche collaborative pour offrir des services de conception structurelle, d'analyse et de consultation qui dépassent les attentes de nos clients.</p>
+                    <p>Notre engagement envers l'excellence technique, l'innovation et le service client nous a permis de construire une réputation solide dans le secteur et de contribuer à la réalisation de projets emblématiques à travers le pays.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="team-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Notre Équipe</h2>
+                <p>Des professionnels passionnés et expérimentés à votre service</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-img">
+                        <img src="images/HASSAN JAHA.jpg" alt="HASSAN JAHA" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="member-info">
+                        <h3>HASSAN JAHA</h3>
+                        <p class="role">Directeur Général</p>
+                        <p>Ingénieur civil avec plus de 20 ans d'expérience dans la conception de structures complexes.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img">
+                        <img src="images/LAMYA ISSAADI.jpeg" alt="LAMYA ISSAADI" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="member-info">
+                        <h3>LAMYA ISSAADI</h3>
+                        <p class="role">Cheffe de Projet Senior</p>
+                        <p>Experte en management de projets d'envergure et spécialiste des structures en béton armé.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img">
+                        <img src="images/EL KHOZAI MOHCINE.jpeg" alt="EL KHOZAI MOHCINE" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="member-info">
+                        <h3>EL KHOZAI MOHCINE</h3>
+                        <p class="role">Ingénieur Structurel</p>
+                        <p>Spécialiste en conception parasismique et structures métalliques innovantes.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img">
+                        <img src="images/HAYAT ENNEBYQY.jpg" alt="HAYAT ENNEBYQY" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="member-info">
+                        <h3>HAYAT ENNEBYQY</h3>
+                        <p class="role">Responsable R&D</p>
+                        <p>Docteure en génie civil, experte en matériaux innovants et structures durables.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img">
+                        <img src="images/Wafa EL AAZMI.jpg" alt="Wafa EL AAZMI" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="member-info">
+                        <h3>Wafa EL AAZMI</h3>
+                        <p class="role">Responsable R&D</p>
+                        <p>Docteure en génie civil, experte en matériaux innovants et structures durables.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img">
+                        <img src="images/ISMAIL EL OUAHIDI.jpeg" alt="ISMAIL EL OUAHIDI" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="member-info">
+                        <h3>ISMAIL EL OUAHIDI</h3>
+                        <p class="role">Responsable R&D</p>
+                        <p>Docteure en génie civil, experte en matériaux innovants et structures durables.</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img">
+                        <img src="images/LAAOUINA YOUNASSE.jpeg" alt="LAAOUINA YOUNASSE" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="member-info">
+                        <h3>LAAOUINA YOUNASSE</h3>
+                        <p class="role">Responsable R&D</p>
+                        <p>Docteure en génie civil, experte en matériaux innovants et structures durables.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="timeline-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Notre Histoire</h2>
+                <p>Les étapes clés de notre développement</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Fondation de StructurePro</h3>
+                        <p class="date">2005</p>
+                        <p>Création de l'entreprise par Hassan Jaha avec une équipe de 5 ingénieurs.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Premier Grand Projet</h3>
+                        <p class="date">2008</p>
+                        <p>Conception structurelle du Centre Commercial Atlantis, notre premier projet d'envergure nationale.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Expansion Internationale</h3>
+                        <p class="date">2012</p>
+                        <p>Ouverture de notre premier bureau à l'étranger et début de nos opérations internationales.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Innovation Technologique</h3>
+                        <p class="date">2017</p>
+                        <p>Lancement de notre département R&D et développement de notre propre logiciel d'analyse structurelle.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Aujourd'hui</h3>
+                        <p class="date">2025</p>
+                        <p>Une équipe de 50 experts, plus de 200 projets réalisés et une présence dans 5 pays.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>StructurePro</h3>
+                    <p>Votre partenaire pour tous vos projets de génie civil et de structure. Nous offrons des solutions innovantes et durables.</p>
+                    <div class="social-links">
+                        <a href="#"><span>f</span></a>
+                        <a href="#"><span>t</span></a>
+                        <a href="#"><span>in</span></a>
+                        <a href="#"><span>ig</span></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Liens rapides</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="store.html">Boutique</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Nos services</h3>
+                    <ul>
+                        <li><a href="#">Conception structurelle</a></li>
+                        <li><a href="#">Analyse sismique</a></li>
+                        <li><a href="#">Études géotechniques</a></li>
+                        <li><a href="#">Inspection des bâtiments</a></li>
+                        <li><a href="#">Consultation technique</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 StructurePro. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
